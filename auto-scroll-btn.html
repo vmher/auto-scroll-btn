@@ -1,0 +1,65 @@
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  .rotated {
+    transform: rotate(180deg);
+  }
+  .auto-scroll {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 36px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  .auto-scroll:active {
+    bottom: 26px;
+  }
+</style>
+<body>
+  <div class="auto-scroll">
+    &#11167;
+  </div>
+</body>
+<script>
+  (function () {
+    autoScroll();
+  })();
+  function autoScroll() {
+    var scrollBtn = document.querySelector(".auto-scroll");
+
+    scrollBtn.onclick = function () {
+      window.scroll({
+        top: document.documentElement.scrollTop + window.innerHeight,
+      });
+      if (
+        document.documentElement.scrollTop + window.innerHeight + 200 >
+        document.documentElement.scrollHeight
+      ) {
+        window.scroll({
+          top: 0,
+        });
+      }
+    };
+
+    document.onscroll = function () {
+      if (
+        document.documentElement.scrollTop + window.innerHeight + 200 >
+        document.documentElement.scrollHeight
+      ) {
+        scrollBtn.classList.add("rotated");
+      } else {
+        scrollBtn.classList.remove("rotated");
+      }
+    };
+  }
+</script>
